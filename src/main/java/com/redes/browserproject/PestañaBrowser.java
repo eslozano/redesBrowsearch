@@ -24,7 +24,8 @@ public class PestañaBrowser extends JPanel{
     }
     
     public String crearConexion(String host){
-        codigohtml=conexion.initClient(host);
+        conexion.initClient(host);
+        codigohtml=conexion.codigohtml;
         return codigohtml;
     }
 }

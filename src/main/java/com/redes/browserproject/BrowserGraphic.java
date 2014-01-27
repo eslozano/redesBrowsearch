@@ -35,7 +35,7 @@ public class BrowserGraphic extends JFrame implements ActionListener{
     public Browser browsearch;
         
     public BrowserGraphic(Browser browsearch){
-        super("Browsearch");  
+        super("Browsearch 1.0");  
         this.browsearch=browsearch;
         this.setLayout(new BorderLayout());
         browserGraphic();        
@@ -101,7 +101,10 @@ public class BrowserGraphic extends JFrame implements ActionListener{
             System.out.println("comienzo html"+browsearch.pestaña.codigohtml);
         }
         if(e.getSource()==facebook){
-            JOptionPane.showMessageDialog(null, e.getActionCommand());
+            this.browsearch.pestaña.conexion.cerrarConexion();
+            //paginaWeb.setContentType("text/html");
+            //paginaWeb.setText(this.browsearch.pestaña.crearConexion("www.bing.com"));
+            //JOptionPane.showMessageDialog(null, e.getActionCommand());
         }
         if(e.getSource()==twitter){
             JOptionPane.showMessageDialog(null, e.getActionCommand());

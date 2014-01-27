@@ -19,9 +19,10 @@ public class TcpClient {
     Socket socket=null;
     PrintWriter request;
     String codigocabecera="",codigohtml="";
+    InputStream inStream;
     
     //Cliente
-    public String initClient(String host){
+    public void initClient(String host){
         this.host=host;
             try{  
                 socket=new Socket (host, PUERTO);  
@@ -31,12 +32,25 @@ public class TcpClient {
                 //LEER EL INDEX
                 codigoRecibidoWebServer();
                 
-                socket.close();
-                return codigohtml;
             }catch(IOException e){
-                return("error"+e.toString());
+                System.out.println("error"+e.toString());
             }         
+        /*    finally {
+                cerrarConexion(); // Paso 4: cerrar la conexión
+            }*/
     }
+    
+    public void cerrarConexion() 
+   {
+      try {
+         request.close();//salida
+         inStream.close();//entrada
+         socket.close();
+      }
+      catch( IOException excepcionES ) {
+         excepcionES.printStackTrace();
+      }
+   }
     
     public void httpRequest() throws IOException{
         request = new PrintWriter(socket.getOutputStream());
@@ -46,7 +60,7 @@ public class TcpClient {
     
     public String codigoRecibidoWebServer() throws IOException{
         boolean html=false;
-        InputStream inStream = socket.getInputStream( ); 
+        inStream = socket.getInputStream( ); 
         BufferedReader rd = new BufferedReader( new InputStreamReader(inStream));
         String line;
         
